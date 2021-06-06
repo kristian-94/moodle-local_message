@@ -21,16 +21,11 @@
  */
 
 function local_message_before_footer() {
-    global $DB, $USER;
-    $sql = "SELECT lm.id, lm.messagetext, lm.messagetype 
-            FROM {local_message} lm 
-            LEFT OUTER JOIN {local_message_read} lmr ON lm.id = lmr.messageid 
-            WHERE lmr.userid <> :userid 
-            OR lmr.userid IS NULL";
-    $params = [
-        'userid' => $USER->id,
-    ];
-    $messages = $DB->get_records_sql($sql, $params);
+    global $USER;
+
+    $manager = new message_manager();
+    $messages = $manager->get_messages($USER->id);
+
     foreach ($messages as $message) {
         $type = \core\output\notification::NOTIFY_INFO;
         if ($message->messagetype === '0') {
@@ -44,10 +39,6 @@ function local_message_before_footer() {
         }
         \core\notification::add($message->messagetext, $type);
 
-        $readrecord = new stdClass();
-        $readrecord->messageid = $message->id;
-        $readrecord->userid = $USER->id;
-        $readrecord->timeread = time();
-        $DB->insert_record('local_message_read', $readrecord);
+        $manager->mark_message_read($message->id, $USER->id);
     }
 }

@@ -24,8 +24,6 @@
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot . '/local/message/classes/form/Edit.php');
 
-global $DB;
-
 $PAGE->set_url(new moodle_url('/local/message/edit.php'));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Edit');
@@ -34,21 +32,13 @@ $PAGE->set_title('Edit');
 // We want to display our form.
 $mform = new Edit();
 
-
-
 if ($mform->is_cancelled()) {
     // Go back to manage.php page
     redirect($CFG->wwwroot . '/local/message/manage.php', get_string('cancelled_form', 'local_message'));
 
-
 } else if ($fromform = $mform->get_data()) {
-
-    // Insert the data into our database table.
-    $recordtoinsert = new stdClass();
-    $recordtoinsert->messagetext = $fromform->messagetext;
-    $recordtoinsert->messagetype = $fromform->messagetype;
-
-    $DB->insert_record('local_message', $recordtoinsert);
+    $manager = new message_manager();
+    $manager->create_message($fromform->messagetext, $fromform->messagetype);
 
     // Go back to manage.php page
     redirect($CFG->wwwroot . '/local/message/manage.php', get_string('created_form', 'local_message') . $fromform->messagetext);
@@ -57,4 +47,3 @@ if ($mform->is_cancelled()) {
 echo $OUTPUT->header();
 $mform->display();
 echo $OUTPUT->footer();
-
