@@ -24,7 +24,7 @@ function local_message_before_footer() {
     global $DB, $USER;
     $sql = "SELECT lm.id, lm.messagetext, lm.messagetype 
             FROM {local_message} lm 
-            left outer join {local_message_read} lmr ON lm.id = lmr.messageid 
+            LEFT OUTER JOIN {local_message_read} lmr ON lm.id = lmr.messageid 
             WHERE lmr.userid <> :userid 
             OR lmr.userid IS NULL";
     $params = [
