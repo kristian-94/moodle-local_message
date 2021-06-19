@@ -23,9 +23,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+use local_message\manager;
 global $CFG;
 require_once($CFG->dirroot . '/local/message/lib.php');
-require_once($CFG->dirroot . '/local/message/classes/message_manager.php');
 
 class local_message_manager_test extends advanced_testcase
 {
@@ -35,7 +35,7 @@ class local_message_manager_test extends advanced_testcase
     public function test_create_message() {
         $this->resetAfterTest();
         $this->setUser(2);
-        $manager = new message_manager();
+        $manager = new manager();
         $messages = $manager->get_messages(2);
         $this->assertEmpty($messages);
 
@@ -61,7 +61,7 @@ class local_message_manager_test extends advanced_testcase
         global $DB;
         $this->resetAfterTest();
         $this->setUser(2);
-        $manager = new message_manager();
+        $manager = new manager();
 
         $type = \core\output\notification::NOTIFY_SUCCESS;
         $manager->create_message('Test message1', $type);

@@ -21,9 +21,12 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace local_message\form;
+use moodleform;
+
 require_once("$CFG->libdir/formslib.php");
 
-class Edit extends moodleform {
+class edit extends moodleform {
     //Add elements to form
     public function definition() {
         global $CFG;

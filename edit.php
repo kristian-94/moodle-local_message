@@ -20,9 +20,10 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_message\form\edit;
+use local_message\manager;
 
 require_once(__DIR__ . '/../../config.php');
-require_once($CFG->dirroot . '/local/message/classes/form/Edit.php');
 
 $PAGE->set_url(new moodle_url('/local/message/edit.php'));
 $PAGE->set_context(\context_system::instance());
@@ -30,14 +31,14 @@ $PAGE->set_title('Edit');
 
 
 // We want to display our form.
-$mform = new Edit();
+$mform = new edit();
 
 if ($mform->is_cancelled()) {
     // Go back to manage.php page
     redirect($CFG->wwwroot . '/local/message/manage.php', get_string('cancelled_form', 'local_message'));
 
 } else if ($fromform = $mform->get_data()) {
-    $manager = new message_manager();
+    $manager = new manager();
     $manager->create_message($fromform->messagetext, $fromform->messagetype);
 
     // Go back to manage.php page

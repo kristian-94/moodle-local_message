@@ -19,11 +19,12 @@
  * @author      Kristian
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+use local_message\manager;
 
 function local_message_before_footer() {
     global $USER;
 
-    $manager = new message_manager();
+    $manager = new manager();
     $messages = $manager->get_messages($USER->id);
 
     foreach ($messages as $message) {
