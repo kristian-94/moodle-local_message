@@ -28,7 +28,7 @@ $PAGE->set_url(new moodle_url('/local/message/manage.php'));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title(get_string('manage_messages', 'local_message'));
 
-$messages = $DB->get_records('local_message');
+$messages = $DB->get_records('local_message', null, 'id');
 
 echo $OUTPUT->header();
 $templatecontext = (object)[

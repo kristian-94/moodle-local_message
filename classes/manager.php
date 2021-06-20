@@ -86,4 +86,30 @@ class manager {
             return false;
         }
     }
+
+    /** Get a single message from its id.
+     * @param int $messageid the message we're trying to get.
+     * @return object|false message data or false if not found.
+     */
+    public function get_message(int $messageid)
+    {
+        global $DB;
+        return $DB->get_record('local_message', ['id' => $messageid]);
+    }
+
+    /** Update details for a single message.
+     * @param int $messageid the message we're trying to get.
+     * @param string $message_text the new text for the message.
+     * @param string $message_type the new type for the message.
+     * @return bool message data or false if not found.
+     */
+    public function update_message(int $messageid, string $message_text, string $message_type): bool
+    {
+        global $DB;
+        $object = new stdClass();
+        $object->id = $messageid;
+        $object->messagetext = $message_text;
+        $object->messagetype = $message_type;
+        return $DB->update_record('local_message', $object);
+    }
 }

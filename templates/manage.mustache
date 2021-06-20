@@ -25,7 +25,12 @@
 }}
 <h1>List of messages</h1>
 {{#messages}}
-    <p>{{messagetext}}</p>
+    <div class="card mt-2 mb-2">
+        <div class="card-body">
+            <p>{{messagetext}}</p>
+            <input type="button" class="btn btn-primary" value="Edit message" onclick="location.href='{{editurl}}?messageid={{id}}'">
+        </div>
+    </div>
 {{/messages}}
 
 <hr>

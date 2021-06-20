@@ -32,6 +32,8 @@ class edit extends moodleform {
         global $CFG;
         $mform = $this->_form; // Don't forget the underscore!
 
+        $mform->addElement('hidden', 'id');
+        $mform->setType('id', PARAM_INT);
         $mform->addElement('text', 'messagetext', get_string('message_text', 'local_message')); // Add elements to your form
         $mform->setType('messagetext', PARAM_NOTAGS);                   //Set type of element
         $mform->setDefault('messagetext', get_string('enter_message', 'local_message'));        //Default value
