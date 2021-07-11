@@ -29,6 +29,7 @@
         <div class="card-body">
             <p>{{messagetext}}</p>
             <input type="button" class="btn btn-primary" value="Edit message" onclick="location.href='{{editurl}}?messageid={{id}}'">
+            <input type="button" class="local_messageid{{id}} btn btn-danger local_message_delete_button" value="Delete message">
         </div>
     </div>
 {{/messages}}
