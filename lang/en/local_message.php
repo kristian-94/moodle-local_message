@@ -21,7 +21,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['pluginname'] = 'Broadcast messages';
 $string['enter_message'] = 'Please enter a message';
+$string['manage'] = 'Manage broadcast messages';
+$string['setting_enable'] = 'Enable';
+$string['setting_enable_desc'] = 'Disable to stop any messages from this plugin being displayed';
 $string['message_type'] = 'Message type';
 $string['message_text'] = 'Message text';
 $string['cancelled_form'] = 'You cancelled the message form';

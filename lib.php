@@ -24,6 +24,10 @@ use local_message\manager;
 function local_message_before_footer() {
     global $USER;
 
+    if (!get_config('local_message', 'enabled')) {
+        return;
+    }
+
     $manager = new manager();
     $messages = $manager->get_messages($USER->id);
 
