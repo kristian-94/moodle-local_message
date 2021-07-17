@@ -28,6 +28,7 @@ $string['setting_enable'] = 'Enable';
 $string['setting_enable_desc'] = 'Disable to stop any messages from this plugin being displayed';
 $string['message_type'] = 'Message type';
 $string['message_text'] = 'Message text';
+$string['message:managemessages'] = 'Manage messages';
 $string['cancelled_form'] = 'You cancelled the message form';
 $string['updated_form'] = 'You updated a message with title ';
 $string['created_form'] = 'You created a message with title ';

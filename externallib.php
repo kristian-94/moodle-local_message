@@ -31,6 +31,8 @@ class local_message_external extends external_api  {
     public static function delete_message($messageid): string {
         $params = self::validate_parameters(self::delete_message_parameters(), array('messageid'=>$messageid));
 
+        require_capability('local/message:managemessages', context_system::instance());
+
         $manager = new manager();
         return $manager->delete_message($messageid);
     }

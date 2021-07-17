@@ -25,6 +25,10 @@ use local_message\manager;
 
 require_once(__DIR__ . '/../../config.php');
 
+require_login();
+$context = context_system::instance();
+require_capability('local/message:managemessages', $context);
+
 $PAGE->set_url(new moodle_url('/local/message/edit.php'));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title('Edit');

@@ -24,6 +24,10 @@ require_once(__DIR__ . '/../../config.php');
 
 global $DB;
 
+require_login();
+$context = context_system::instance();
+require_capability('local/message:managemessages', $context);
+
 $PAGE->set_url(new moodle_url('/local/message/manage.php'));
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title(get_string('manage_messages', 'local_message'));
