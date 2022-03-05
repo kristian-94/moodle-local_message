@@ -33,6 +33,7 @@ $PAGE->set_context(\context_system::instance());
 $PAGE->set_title(get_string('manage_messages', 'local_message'));
 $PAGE->set_heading(get_string('manage_messages', 'local_message'));
 $PAGE->requires->js_call_amd('local_message/confirm');
+$PAGE->requires->css('/local/message/styles.css');
 
 $messages = $DB->get_records('local_message', null, 'id');
 
@@ -40,6 +41,7 @@ echo $OUTPUT->header();
 $templatecontext = (object)[
     'messages' => array_values($messages),
     'editurl' => new moodle_url('/local/message/edit.php'),
+    'bulkediturl' => new moodle_url('/local/message/bulkedit.php'),
 ];
 
 echo $OUTPUT->render_from_template('local_message/manage', $templatecontext);

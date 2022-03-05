@@ -35,5 +35,11 @@ $string['created_form'] = 'You created a message with title ';
 $string['manage_messages'] = 'Manage messages';
 $string['delete_message'] = 'Delete message';
 $string['delete_message_confirm'] = 'Are you sure you want to delete message?';
+$string['whattodo'] = 'What do you want to do with your selected messages?';
+$string['choose_messages'] = 'Choose your messages';
+$string['delete_all_selected'] = 'Delete all selected?';
+$string['bulk_edit'] = 'Bulk Edit';
+$string['bulk_edit_messages'] = 'Bulk edit your messages';
+$string['bulk_edit_successful'] = 'Bulk edit successful!';
 
 

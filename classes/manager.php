@@ -68,6 +68,14 @@ class manager {
         }
     }
 
+    /** Gets all messages
+     * @return array of messages
+     */
+    public function get_all_messages(): array {
+        global $DB;
+        return $DB->get_records('local_message');
+    }
+
     /** Mark that a message was read by this user.
      * @param int $message_id the message to mark as read
      * @param int $userid the user that we are marking message read
@@ -113,6 +121,16 @@ class manager {
         return $DB->update_record('local_message', $object);
     }
 
+    /** Update the type for an array of messages.
+     * @return bool message data or false if not found.
+     */
+    public function update_messages(array $messageids, $type): bool
+    {
+        global $DB;
+        list($ids, $params) = $DB->get_in_or_equal($messageids);
+        return $DB->set_field_select('local_message', 'messagetype', $type, "id $ids", $params);
+    }
+
     /** Delete a message and all the read history.
      * @param $messageid
      * @return bool
@@ -126,6 +144,23 @@ class manager {
         $deletedMessage = $DB->delete_records('local_message', ['id' => $messageid]);
         $deletedRead = $DB->delete_records('local_message_read', ['messageid' => $messageid]);
         if ($deletedMessage && $deletedRead) {
+            $DB->commit_delegated_transaction($transaction);
+        }
+        return true;
+    }
+
+    /** Delete all messages by id.
+     * @param $messageids
+     * @return bool
+     */
+    public function delete_messages($messageids)
+    {
+        global $DB;
+        $transaction = $DB->start_delegated_transaction();
+        list($ids, $params) = $DB->get_in_or_equal($messageids);
+        $deletedMessages = $DB->delete_records_select('local_message', "id $ids", $params);
+        $deletedReads = $DB->delete_records_select('local_message_read', "messageid $ids", $params);
+        if ($deletedMessages && $deletedReads) {
             $DB->commit_delegated_transaction($transaction);
         }
         return true;
